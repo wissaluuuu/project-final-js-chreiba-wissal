@@ -74,22 +74,28 @@ if (ask=== `sign up`) {
     //! age
     let Age = prompt(`gimme ur age`);
     //! dont understand it (returns true if a value is Not-a-Number)
-        // if (isNaN(Age) || Age.length === 0) {
-        //     alert(`Please enter a valid age`);
-        // }
-        while (Age.includes(" ") || Age.length >= 3 ) {
-            Age = prompt("gimmeeeeee ur age")
+    //^ isNaN meaning it tries to convert the argument to a number before checking if it's NaN
+        while (Age.includes(" ") || Age.length >= 3 ||isNaN(Age) ) {
+            Age = prompt("gimmeeeeeeeeeeeeeeeee ur age")
         }
-        
-
+//&
     //! password
 
     let Password = prompt(`gimme ur password`)
 
-    if (!/(?=.*[@#\-+*\/])(?=.*[a-zA-Z])/.test(Password)) {
-        prompt(`must contain  one special character nd at least 7 charactrs `);
+    // while (Password.includes(" ") || Password.length<=7 || Password.includes("@"||"-"||"+"||"/"||"#") == false) {
+    //     Password= prompt(`try another password`)
+    // }
+    // let Password = prompt(`Give me your password`);
+    if (!/(?=.*[@#\-+*\/])(?=.*[a-zA-Z])/.test(Password) || Password.length < 7) {
+        alert(`Incorrect! Password should contain at least one special character and be at least 7 characters long`);
     }
-
+//& 
+//! confirmation
+let confirmp = prompt(`gimme ur confirm pass`)
+    if (confirmp != Password) {
+        alert(`incorrect pass`)
+    }
 
     
 let user = (username,name,email,password)=>{
@@ -134,8 +140,34 @@ user(Name,Username,Email,Password)
 
 //             # Password:
 //             - Check if the entered password is associated with the previously entered email.
-//&loging
-   
+        //&loging
+        else if (ask == `log in`){
+        authenticateUser =(loginEmail,loginPassword)=>{
+            let loginEmail = prompt(`gimme ur loging username`)
+            if (loginEmail.length==0) {
+                loginEmail = prompt(`loging Email cannot be empty`)
+            }
+            else if (loginEmail != Email) {
+                prompt(`there is no user with this Email`)
+            }
+            //& check if the email exists in database
+            for (let index = 0; index < userdatabase.length; index++) {
+                const element = userdatabase[index];
+                while (Username==element.Username) {
+                    Username= prompt(`username must be unique`)
+                }
+    
+            let loginPassword = prompt(`gimme ur loging password`)
+            if (loginPassword.length==0) {
+                loginPassword = prompt(`loging password cannot be empty`)
+            }
+            else if (loginPassword != Password) {
+                prompt(`there is no user with this password`)
+            }
+            }
+            }
+        }
+        authenticateUser(Email,Password)
 //         * If the user chooses to change the password:
 //             - They must enter their existing Email in the Database.
 //&
