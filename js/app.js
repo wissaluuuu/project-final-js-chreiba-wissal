@@ -22,7 +22,6 @@ let ask = prompt(`choose to log in / sign up / change password`)
 
 //         * If the user chooses to sign up, here are the details they must enter:
 //             # Name (Full):
-              //! prompt
 //             - Check for leading or trailing spaces.
 //             - The first letter should be capitalized.
 //             - After each space, the first letter should remain capitalized.
@@ -30,7 +29,7 @@ let ask = prompt(`choose to log in / sign up / change password`)
 //             - Do not save the Name if it has less than 5 characters (excluding spaces).
 //             - Do not save the Name if it contains numbers, "@", or similar special characters.
 //&
-if (ask== `sign up`) {
+if (ask=== `sign up`) {
     let userdatabase =[
         {
             Username:`wissalu`,
@@ -39,6 +38,7 @@ if (ask== `sign up`) {
             Password:`123456`,
         }
     ]
+    
     let Username = prompt(`gimme ur username`)
     for (let index = 0; index < userdatabase.length; index++) {
         const element = userdatabase[index];
@@ -46,49 +46,49 @@ if (ask== `sign up`) {
             Username= prompt(`username must be unique`)
         }
     }
+    
+    
     //! Name
     //! check ittt at home
     let Name = prompt(`gimme ur Name`)
-    Name = Name.trim()
     Name = Name.trim().split(' ')
-    // for (let index = 0; index < Name.length; index++) {
-    //     Name[index] = Name[index][0].toUpperCase() + Name[index].slice(1);
-    // }
-    
-    //&
-    // while (Name.length<5) {
-    //     prompt(`ur Name must contain at least 5 charachters`)
-    //     break
-    // }
-
-
-//! email
-let Email = prompt(`gimme ur email`)
-Email= Email.trim()
-Email=Email.toLowerCase()
-if (Email.length<=10 ) {
-    prompt(`ur email must countain at least 10 charachter`)
-}
-for (let index = 0; index < userdatabase.length; index++) {
-    const element = userdatabase[index];
-    while (Email == element.Email) {
-        Email = prompt(`email must be unique`);
+    for (let index = 0; index < Name.length; index++) {
+        Name[index] = Name[index][0].toUpperCase() + Name[index].slice(1);
+        
     }
-}
-//! age
-let Age = prompt(`gimme ur age`)
-if ( Age.length=3) {
-    prompt(`don't be silly enter ur age `)
-}
+    Name= Name.join(` `)
 
-//! password
+    //! email
+    let Email = prompt(`gimme ur email`)
+    Email= Email.trim()
+    Email=Email.toLowerCase()
+    if (Email.length<=10 ) {
+        prompt(`ur email must countain at least 10 charachter`)
+    }
+    for (let index = 0; index < userdatabase.length; index++) {
+        const element = userdatabase[index];
+        while (Email == element.Email) {
+            Email = prompt(`email must be unique`);
+        }
+    }
+    //! age
+    let Age = prompt(`gimme ur age`);
+    //! dont understand it (returns true if a value is Not-a-Number)
+        // if (isNaN(Age) || Age.length === 0) {
+        //     alert(`Please enter a valid age`);
+        // }
+        while (Age.includes(" ") || Age.length >= 3 ) {
+            Age = prompt("gimmeeeeee ur age")
+        }
+        
 
-let Password = prompt(`gimme ur password`)
-//! it should not contain espace    and at least countain 7 charachters
+    //! password
 
-if (!/(?=.*[@#\-+*\/])(?=.*[a-zA-Z])/.test(Password)) {
-    prompt(`Incorrect! It should contain  one special character `);
-}
+    let Password = prompt(`gimme ur password`)
+
+    if (!/(?=.*[@#\-+*\/])(?=.*[a-zA-Z])/.test(Password)) {
+        prompt(`must contain  one special character nd at least 7 charactrs `);
+    }
 
 
     
@@ -135,27 +135,7 @@ user(Name,Username,Email,Password)
 //             # Password:
 //             - Check if the entered password is associated with the previously entered email.
 //&loging
-    else if (ask == `log in`){
-        let loginEmail = prompt(`gimme ur loging username`)
-        if (loginEmail.length==0) {
-            loginEmail = prompt(`loging Email cannot be empty`)
-        }
-        //& check if the email exists in database
-        for (let index = 0; index < userdatabase.length; index++) {
-            const element = userdatabase[index];
-            while (Username==element.Username) {
-                Username= prompt(`username must be unique`)
-            }
-
-        let loginPassword = prompt(`gimme ur loging password`)
-        if (loginPassword.length==0) {
-            loginPassword = prompt(`loging password cannot be empty`)
-        }
-
-        authenticateUser(loginEmail,loginPassword)
-
-        }
-    }
+   
 //         * If the user chooses to change the password:
 //             - They must enter their existing Email in the Database.
 //&
